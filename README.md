@@ -1,4 +1,4 @@
-# Vigram test project
+# Vigrom test project
 
 ### Установка
 ```bash
@@ -13,4 +13,12 @@ php artisan key:generate
 php artisan migrate
 ```
 
-http://localhost:8000/
+### Тестирование
+```bash
+make test
+
+// or
+
+make cli
+php artisan test
+```

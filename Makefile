@@ -21,3 +21,6 @@ logs:
 
 docker-config:
 	docker-compose ${DOCKER_COMPOSE_FLAGS} config
+
+test:
+	docker-compose ${DOCKER_COMPOSE_FLAGS} exec --user=www-data php-fpm php artisan test
