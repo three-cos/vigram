@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Dtos\Factories\TransactionDtoFactory;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TransactionRequest;
-use App\Models\User;
+use App\Models\Wallet;
 use App\Services\Wallet\WalletBalanceHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -30,10 +30,10 @@ class WalletController extends Controller
 
     public function show(Request $request): JsonResponse
     {
-        $user = User::query()->findOrFail($request->input('user_id'));
+        $wallet = Wallet::query()->findOrFail($request->input('wallet_id'));
 
         return response()->json([
-            'balance' => $user->wallet->getBalanceAmount()->getAmount(),
+            'balance' => $wallet->getBalanceAmount()->getAmount(),
         ]);
     }
 }
