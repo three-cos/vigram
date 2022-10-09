@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+  app:
+    build: ./docker/nginx
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:80"
+    depends_on:
+      - php-fpm
+
+  php-fpm:
+    build: ./docker/php-fpm
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+
+  db:
+    image: mariadb
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./docker/mysql/db:/var/lib/mysql
+
+volumes:
+  db:
