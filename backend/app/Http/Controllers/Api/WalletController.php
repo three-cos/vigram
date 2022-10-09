@@ -6,6 +6,7 @@ use App\Dtos\Factories\TransactionDtoFactory;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TransactionRequest;
 use App\Models\Wallet;
+use App\Repositories\WalletRepository;
 use App\Services\Wallet\WalletBalanceHandler;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -34,6 +35,16 @@ class WalletController extends Controller
 
         return response()->json([
             'balance' => $wallet->getBalanceAmount()->getAmount(),
+        ]);
+    }
+
+    public function refunds(Request $request): JsonResponse
+    {
+        $repo = new WalletRepository();
+
+        return response()->json([
+            'refunds_raw' => $repo->getRefundsRawSql($request->input('wallet_id'), days: 7),
+            'refunds_laravel' => $repo->getRefundsLaravelWay($request->input('wallet_id'), days: 7),
         ]);
     }
 }
