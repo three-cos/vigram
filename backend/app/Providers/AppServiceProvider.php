@@ -2,27 +2,18 @@
 
 namespace App\Providers;
 
+use App\Contracts\CurrencyUpdater;
+use App\Services\Currency\DummyUpdater;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
     public function register()
     {
-        //
     }
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
     public function boot()
     {
-        //
+        $this->app->bind(CurrencyUpdater::class, DummyUpdater::class);
     }
 }
