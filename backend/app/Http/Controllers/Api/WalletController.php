@@ -43,8 +43,8 @@ class WalletController extends Controller
         $repo = new WalletRepository();
 
         return response()->json([
-            'refunds_raw' => $repo->getRefundsRawSql($request->input('wallet_id'), days: 7),
-            'refunds_laravel' => $repo->getRefundsLaravelWay($request->input('wallet_id'), days: 7),
+            'refunds_raw' => $repo->getRefundsRawSql($request->input('wallet_id'), $request->input('days', 7)),
+            'refunds_laravel' => $repo->getRefundsLaravelWay($request->input('wallet_id'), $request->input('days', 7)),
         ]);
     }
 }
